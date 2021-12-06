@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
     # variable de instancia a todos los productos
-    @product = Product.all
+    @products = Product.all
   end
 end

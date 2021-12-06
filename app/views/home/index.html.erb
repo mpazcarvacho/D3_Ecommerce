@@ -1,2 +1,33 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
+
+
+<div class="container">
+  <% @products.each_slice(4) do |products|%>
+    <div class="row">
+      <% products.each do |product|%>
+      <div class="col-3">
+        <div class="card">
+          <%=image_tag 'https://dummyimage.com/600x400/c7c7c7/737373&text=image', class:'card-img-top img-fluid'%>
+          <div class='card-body'>
+            <div class="card-title">
+              <%=product.name%>
+            </div>
+            <div class="card-text">
+              <div class='badge bagde-primary'>
+                <%= product.categories.first.name %>
+              </div>
+              <div>
+                <%= number_to_currency product.price%>
+              </div>
+              <div class="row float-right">
+                <div class="col-md-12">
+                  <button class="btn btn-primary btn-sm"> Add to cart </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  <%end%>
+</div>
