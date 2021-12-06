@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_06_031106) do
+ActiveRecord::Schema.define(version: 2021_12_06_180634) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,6 +35,12 @@ ActiveRecord::Schema.define(version: 2021_12_06_031106) do
     t.integer "product_id", null: false
     t.index ["category_id", "product_id"], name: "index_categories_products_on_category_id_and_product_id"
     t.index ["product_id", "category_id"], name: "index_categories_products_on_product_id_and_category_id"
+  end
+
+  create_table "colors", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "order_items", force: :cascade do |t|
@@ -87,6 +93,12 @@ ActiveRecord::Schema.define(version: 2021_12_06_031106) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sizes", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -97,6 +109,18 @@ ActiveRecord::Schema.define(version: 2021_12_06_031106) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "variations", force: :cascade do |t|
+    t.integer "product_id"
+    t.integer "color_id"
+    t.integer "size_id"
+    t.integer "stock"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["color_id"], name: "index_variations_on_color_id"
+    t.index ["product_id"], name: "index_variations_on_product_id"
+    t.index ["size_id"], name: "index_variations_on_size_id"
   end
 
 end

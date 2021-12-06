@@ -2,10 +2,10 @@
 
 <div class="container">
 <h2 class="text-center">Productos</h2>
-  <% @products.each_slice(4) do |products|%>
+  <% @products.each_slice(3) do |products|%>
     <div class="row">
       <% products.each do |product|%>
-      <div class="col-3">
+      <div class="col-4">
         <div class="card">
           <%=image_tag 'https://dummyimage.com/600x400/c7c7c7/737373&text=image', class:'card-img-top img-fluid'%>
           <div class='card-body'>
@@ -19,12 +19,17 @@
               <div>
                 <%= number_to_currency product.price%>
               </div>
+
               <div class="row float-end">
                 <div class="col-md-12">
                   <%# <button class="btn btn-primary btn-sm"> Add to cart </button> %>
                   <%= form_for :cart, url: cart_path, method: :put do |f|%>
                     <%= f.hidden_field :product_id, value: product.id %>
                     <%= f.hidden_field :quantity, value: 1 %>
+              <%# TODO add here selects for color and size %>
+                    
+                    <%= f.select :variation_id, variations_for_select(product.id), {}, class: 'form-select form-select-sm mt-2 mb-2 float-start'%>
+
                     <%= f.submit "Add to cart", class:'btn btn-primary btn-sm float-end'%>
                   <% end %>
                 </div>
@@ -37,3 +42,7 @@
     </div>
   <%end%>
 </div>
+
+<%# TODO add variations select %>
+<%# TODO show only products with stock %>
+<%# TODO add to cart product with its variations ? %>
