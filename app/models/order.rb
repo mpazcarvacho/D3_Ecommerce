@@ -13,7 +13,6 @@ class Order < ApplicationRecord
   def generate_number(size)
     self.number = loop do
       rand_str = random_candidate(size)
-      puts rand_str
       break rand_str unless Order.exists?(number: rand_str)
     end
     
@@ -22,4 +21,12 @@ class Order < ApplicationRecord
   def random_candidate(size)
     "#{ORDER_PREFIX}#{Array.new(size){rand(size)}.join}"
   end
+
+  def add_product(product_id, quantity)
+    product = Product.find(product_id)
+    if product && product.stock > 0
+      order_items.create(product_id: product.id, quantity: quantity, price: product.price)
+    end
+  end
+
 end

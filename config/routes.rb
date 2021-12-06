@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :categories
 
   end
+
+  # Recurso particular porque no depende del id, depende del usuario actual
+  resource :cart, only: [:show, :update]
+  
   root to: "home#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
