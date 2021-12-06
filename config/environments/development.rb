@@ -61,4 +61,16 @@ Rails.application.configure do
 
   # DONE DEVISE
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
+  # DONE Paypal activemercahant https://github.com/activemerchant/active_merchant
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.mode = :test
+    paypal_options = {
+      login: 'sb-kpll78893781_api1.business.example.com',
+      password: 'MRQ3FD32ZF3XES6Y',
+      signature: 'A2BQyRAs7PD.oiW6gYt.hI11u70pAS7Kxp7Jjy0g60d24NR.sV2HpMi9'
+    }
+    ::EXPRESS_GATEWAY = ActiveMerchant::Billing::PaypalExpressGateway.new(paypal_options)
+    end
+  
 end
