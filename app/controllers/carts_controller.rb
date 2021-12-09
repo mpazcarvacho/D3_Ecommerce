@@ -4,8 +4,13 @@ class CartsController < ApplicationController
   def update
     product_id = params[:cart][:product_id]
     quantity = params[:cart][:quantity]
+    
+    # DONE added variation_id param to current_order
 
-    current_order.add_product(product_id, quantity)
+    variation_id = params[:cart][:variation_id]
+    puts "#{Variation.find(variation_id).color.description}"
+
+    current_order.add_product(product_id, quantity, variation_id)
     
     redirect_to root_path, notice: 'Product added succesfully'
   end

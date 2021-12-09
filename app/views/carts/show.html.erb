@@ -14,6 +14,8 @@
           <div class="col-xs-4 col-md-6">
             <h4 class="product-name"><strong><%= item.product.name %></strong></h4>
             <h4><small><%= item.product.description %></small></h4>
+            <%# DONE add variation %>
+            <h4><small><%= "#{Variation.find_by_id(item.variation_id)&.size&.description} - #{Variation.find_by_id(item.variation_id)&.color&.description}"%></small></h4>
           </div>
           <div class="col-xs-6 col-md-4 row">
             <div class="col-xs-6 col-md-6 text-right" style="padding-top: 5px">

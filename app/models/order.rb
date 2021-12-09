@@ -23,11 +23,12 @@ class Order < ApplicationRecord
     "#{ORDER_PREFIX}#{Array.new(size){rand(size)}.join}"
   end
 
-  def add_product(product_id, quantity)
-    # TODO update stock in variations. Add variations field to  orderitem before.
+  def add_product(product_id, quantity, variation_id)
+    # DONE Add variations field to  orderitem
     product = Product.find(product_id)
     if product && product.stock > 0
-      order_items.create(product_id: product.id, quantity: quantity, price: product.price)
+      # DONE add variation_id
+      order_items.create(product_id: product.id, quantity: quantity, price: product.price, variation_id: variation_id)
       compute_total
     end
   end
