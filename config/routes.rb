@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     end
   end
   
+  # TODO route to product description
+  get 'description/show/:product_id', to: 'description#show', as: 'description'
+
   root to: "home#index"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

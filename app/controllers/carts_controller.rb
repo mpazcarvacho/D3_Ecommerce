@@ -77,7 +77,7 @@ class CartsController < ApplicationController
         payment.save!
       end
 
-      # TODO diminish available stock from variations bought
+      # DONE diminish available stock from variations bought
       update_stock(order)
 
       redirect_to root_url, notice: "Compra exitosa"
@@ -87,19 +87,15 @@ class CartsController < ApplicationController
   end
 
   def update_stock(order)
-    puts 'SHOW here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1'
-    puts "current order is : #{order}"
-    puts "orders are #{OrderItem.where(order_id: order.id).length}"
+
     orders = OrderItem.where(order_id: order.id)
     orders.each do |o|
       var_id = o.variation_id
       variations = Variation.where(id: o.variation_id)
       variations.each do |var|
-        puts "actual stock is #{var.stock}!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
         new_stock = var.stock - 1
         var.stock = new_stock
         var.save!
-        puts "THE NEW STOCK IS #{var.stock}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
       end
     end
   end
