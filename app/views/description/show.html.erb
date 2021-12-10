@@ -1,5 +1,44 @@
-<div>
+<div class="text-center card">
+  <div class="row card-body p-2">
+    <div class="card-title">
+      <h2><%=@product.name%></h2>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div class="p-2">
+      <%=image_tag 'https://dummyimage.com/600x400/c7c7c7/737373&text=image', class:'card-img-top img-fluid'%></div>
+      </div>
+      <div class="col-6">
+        <div class="row">
+          <div class="card-text">
+            <div class='badge bg-primary'>
+              <%# TODO check what happens when there is more than one category. %>
+              <%# TODO subcateogries should be shown here too? %>
+                <%= @product.categories.first.name %>
+              </div>
+              <div>
+                <h3><%=@product.description%></h3>
+              </div>
+              <div>
+                <%= number_to_currency @product.price%>
+              </div>
+              <div class="row float-end">
+                <div class="col-md-12">
+                  <%# <button class="btn btn-primary btn-sm"> Add to cart </button> %>
+                  <%= form_for :cart, url: cart_path, method: :put do |f|%>
+                    <%= f.hidden_field :product_id, value: @product.id %>
+                    <%= f.hidden_field :quantity, value: 1 %>
+              <%# DONE add here selects for color and size %>
+                    
+                    <%= f.select :variation_id, variations_for_select(@product.id), {}, class: 'form-select form-select-sm mt-2 mb-2 float-start'%>
 
-  <h2>description</h2>
-  <%=@product.name%>
+                    <%= f.submit "Add to cart", class:'btn btn-primary btn-sm float-end'%>
+                  <% end %>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

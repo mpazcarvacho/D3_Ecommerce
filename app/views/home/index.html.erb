@@ -7,7 +7,7 @@
       <% products.each do |product|%>
       <div class="col-4">
         <div class="card">
-          <%= link_to description_path(product_id) do%><%=image_tag 'https://dummyimage.com/600x400/c7c7c7/737373&text=image', class:'card-img-top img-fluid'%>
+          <%= link_to description_path(product.id) do%><%=image_tag 'https://dummyimage.com/600x400/c7c7c7/737373&text=image', class:'card-img-top img-fluid'%>
           <%end%>
           <div class='card-body'>
             <div class="card-title">
