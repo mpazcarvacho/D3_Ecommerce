@@ -17,6 +17,9 @@ class CartsController < ApplicationController
 
   def show
     @order = current_order
+
+    # update_stock
+    
   end
 
   def pay_with_paypal
@@ -25,6 +28,7 @@ class CartsController < ApplicationController
 
     # price must be in cents
     price = order.total*100
+    
 
     response = EXPRESS_GATEWAY.setup_purchase(
       price,
@@ -65,14 +69,38 @@ class CartsController < ApplicationController
       # notice below these are apostrophes
       order.state = 'completed'
       payment.state = 'completed'
+      puts "on payment order id is #{order.id}"
+
       # if one of the operations below fail it can be reverted; either they're all succesful or none is executed. Transactions are protective blocks where SQL statements are only permanent if they can all succeed as one atomic action.
       ActiveRecord::Base.transaction do
         order.save!
         payment.save!
       end
+
+      # TODO diminish available stock from variations bought
+      update_stock(order)
+
       redirect_to root_url, notice: "Compra exitosa"
     else
       redirect_to root_url, alert: "Hemos tenido problemas para procesar tu pago"
+    end
+  end
+
+  def update_stock(order)
+    puts 'SHOW here!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1'
+    puts "current order is : #{order}"
+    puts "orders are #{OrderItem.where(order_id: order.id).length}"
+    orders = OrderItem.where(order_id: order.id)
+    orders.each do |o|
+      var_id = o.variation_id
+      variations = Variation.where(id: o.variation_id)
+      variations.each do |var|
+        puts "actual stock is #{var.stock}!!!!!!!!!!!!!!!!!!!!!!!!!!!1"
+        new_stock = var.stock - 1
+        var.stock = new_stock
+        var.save!
+        puts "THE NEW STOCK IS #{var.stock}!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+      end
     end
   end
 end
