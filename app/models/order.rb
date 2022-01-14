@@ -6,6 +6,8 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
   has_many :payments
+  belongs_to :coupons
+
   # función anónima o lambda para pasar parámetros
   before_create -> { generate_number(RANDOM_SIZE)}
 
