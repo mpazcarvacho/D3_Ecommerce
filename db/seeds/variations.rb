@@ -1,0 +1,2 @@
+Variation.destroy_all
+

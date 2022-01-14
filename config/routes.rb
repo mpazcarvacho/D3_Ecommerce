@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :variations
 
   get 'home/index'
+
   devise_for :users
   devise_for :admins
   

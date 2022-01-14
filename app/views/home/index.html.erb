@@ -2,6 +2,7 @@
 
 <div class="container">
 <h2 class="text-center">Productos</h2>
+<%# TODO solve n+1 queries issue %>
   <% @products.each_slice(3) do |products|%>
     <div class="row">
       <% products.each do |product|%>
@@ -23,9 +24,6 @@
               <div>
                 <%= variations_for_select(product.id).first&.first%>
               </div>
-
-              
-
             </div>
           </div>
         </div>
@@ -37,4 +35,4 @@
 
 
 <%# TODO show only products with stock %>
-<%# TODO add to cart product with its variations ? %>
+<%# DONE add to cart product with its variations ? %>
