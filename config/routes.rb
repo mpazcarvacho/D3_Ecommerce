@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :coupons
   resources :variations
 
   get 'home/index'

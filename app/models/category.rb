@@ -9,6 +9,4 @@ class Category < ApplicationRecord
   scope :all_parents, -> {where(category_id: nil)}
   scope :all_subcategories, -> {where.not(category_id: nil)}
 
-
-
 end

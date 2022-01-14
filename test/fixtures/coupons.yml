@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unique: false
+  code: MyString
+  string: MyString
+  fix_discount: false
+  discount_value: 9.99
+  user: one
+
+two:
+  unique: false
+  code: MyString
+  string: MyString
+  fix_discount: false
+  discount_value: 9.99
+  user: two
