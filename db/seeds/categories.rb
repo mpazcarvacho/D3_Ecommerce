@@ -6,51 +6,53 @@ categories.each do |category|
   Category.create(name: category)
 end
 
-Category.where(name: "Shorts").create(
-  name: "Men Shorts",
-  category_id: category.id
-)
+cat_id_01 = Category.find_by(name: "Shorts")
 
-Category.where(name: "Shorts").create(
-  name: "Women Shorts",
-  category_id: category.id
-)
+subcategories = ['Men Shorts', 'Women Shorts', "Summer"]
+subcategories.each do |subcat|
+  Category.create(
+    name: subcat,
+    category_id: cat_id_01,
+  )
+end
 
-Category.where(name: "Shorts").create(
-  name: "Summer",
-  category_id: category.id
-)
+cat_id_02 = Category.find_by(name: "Shirts")
 
-Category.where(name: "Shirts").create(
-  name: "Winter",
-  category_id: category.id
-)
+subcategories_2 = ['Winter', "Spring"]
+subcategories_2.each do |subcat|
+  Category.create(
+    name: subcat,
+    category_id: cat_id_02,
+  )
+end
 
-Category.where(name: "Pants").create(
-  name: "Jeans",
-  category_id: category.id
-)
+cat_id_03 = Category.find_by(name: "Pants")
 
-Category.where(name: "Pants").create(
-  name: "Long",
-  category_id: category.id
-)
+subcategories_3 = ['Jeans', 'Not Jeans']
+subcategories_3.each do |subcat|
+  Category.create(
+    name: subcat,
+    category_id: cat_id_03,
+  )
+end
 
-Category.where(name: "Shirts").create(
-  name: "Summer",
-  category_id: category.id
-)
+cat_id_04 = Category.find_by(name: "Dresses")
 
-Category.where(name: "Dresses").create(
-  name: "Long",
-  category_id: category.id
-)
+subcategories_4 = ['Fancy', 'Bridge']
+subcategories_4.each do |subcat|
+  Category.create(
+    name: subcat,
+    category_id: cat_id_04,
+  )
+end
+
+
 
 Category.all.each do |category|
   3.times do |i|
     Category.create(
-      name: "Subcategory#{i}"
-      category_id: category.id
+      name: "Subcategory#{i}",
+      category_id: category.id,
     )
   end
 end

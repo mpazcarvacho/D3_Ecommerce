@@ -1,7 +1,7 @@
 Product.destroy_all
 
-category_shorts= category.find_by(name: "Shorts")
-category_shorts_men= category.find_by(name: "Men Shorts")
+category_shorts= Category.find_by(name: "Shorts")
+category_shorts_men= Category.find_by(name: "Men Shorts")
 
 p_01 = Product.create(
   name: "Denim shorts", 
@@ -10,12 +10,13 @@ p_01 = Product.create(
   price: 21990, 
   sku: ('A'..'Z').to_a.shuffle.first(10).join
 )
+
 p_01.categories << category_shorts
 p_01.categories << category_shorts_men
 
 
-category_shirts= category.find_by(name: "Shirts")
-category_shirts_winter= category.find_by(name: "Winter Shirts")
+category_shirts= Category.find_by(name: "Shirts")
+category_shirts_winter= Category.find_by(name: "Winter")
 
 p_02 = Product.create(
   name: "Maui & Sons long sleeve Shirt", 
@@ -27,8 +28,8 @@ p_02 = Product.create(
 p_02.categories << category_shirts
 p_02.categories << category_shirts_winter
 
-category_pants= category.find_by(name: "Pants")
-category_jeans= category.find_by(name: "Jeans")
+category_pants= Category.find_by(name: "Pants")
+category_jeans= Category.find_by(name: "Jeans")
 
 p_03 = Product.create(
   name: "Zara ripped jeans", 
