@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   resource :cart, only: [:show, :update] do
     member do
       # new route
-      get :search_coupon
+      patch :search_coupon
       patch :add_coupon
       post :pay_with_paypal
       get :process_paypal_payment

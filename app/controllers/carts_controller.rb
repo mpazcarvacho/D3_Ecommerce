@@ -24,13 +24,13 @@ class CartsController < ApplicationController
   end
 
   def add_coupon
-
-    current_coupons = current_user.coupons
+    # if there are more than one coupon, only gets first one
+    current_coupons = current_user.coupons.where(used: false)
     if current_user.coupons.present?
       current_coupons.each do |coupon|
         current_order.update(
           coupon_id: coupon.id,
-          total: coupon.fix_discount ? current_order.total - coupon.discount_value : current_order.total * 1-(coupon.discount_value),
+          total: coupon.fix_discount ? current_order.total - coupon.discount_value : current_order.total * (1-coupon.discount_value),
         )
         coupon.update(
           used: true,
@@ -39,20 +39,15 @@ class CartsController < ApplicationController
       end
       
     else
-      flash[:notice]="no"
+      flash[:alert]="There are no available coupons!"
     end
   end
 
   def search_coupon
 
-    # @coupon = Coupon.all.where(code: params[:q])
-   
-   
-    
-    
-    # @coupon = Coupon.all
-    
-    # redirect_to root_path
+    @coupon = Coupon.all.where(code: params[:q])
+  
+  #  HERE there will be code to search for available coupons with code
   end
 
   def pay_with_paypal
