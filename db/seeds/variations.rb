@@ -66,3 +66,9 @@ Variation.create(
   size_id: size_id_l,
   stock: 0,
 )
+
+# Update product stock to be the sum of variations stock
+Product.all.each do |p|
+  p.stock = Variation.where(product_id: p.id).map{|v| v.stock}.sum
+  p.save
+end
