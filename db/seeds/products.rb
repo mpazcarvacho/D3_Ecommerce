@@ -42,15 +42,15 @@ p_03.categories << category_pants
 p_03.categories << category_jeans
 
 
-Category.all.each do |category|
-  4.times do |i|
-    product_attributes = {
-      name: "Producto_#{i}",
-      # DONE stock should be the sum of variations stock; set initially at zero
-      stock: 0,
-      price: rand(1..100)*990,
-      sku: ('A'..'Z').to_a.shuffle.first(10).join}
-      Product.create(product_attributes).categories << category
+# Category.all.each do |category|
+  
+#     product_attributes = {
+#       name: "Producto_#{i}",
+#       # DONE stock is the sum of variations stock; set initially at zero (added on home controller), here set at random to get more products
+#       stock: rand(0..10),
+#       price: rand(1..100)*990,
+#       sku: ('A'..'Z').to_a.shuffle.first(10).join}
+#       Product.create(product_attributes).categories << category
     
-  end
-end
+  
+# end

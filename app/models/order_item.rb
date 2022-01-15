@@ -4,4 +4,9 @@ class OrderItem < ApplicationRecord
   has_many :variations
   has_many :colors, through: :variations
   has_many :sizes, through: :variations
+
+  # TODO 
+  # def product
+  #   variation.product
+  # end
 end

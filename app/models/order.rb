@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   has_many :order_items
   has_many :products, through: :order_items
   has_many :payments
-  belongs_to :coupons
+  belongs_to :coupons, optional: :true
 
   # función anónima o lambda para pasar parámetros
   before_create -> { generate_number(RANDOM_SIZE)}
@@ -30,6 +30,8 @@ class Order < ApplicationRecord
     product = Product.find(product_id)
     if product && product.stock > 0
       # DONE add variation_id
+      # BUG order id missing??? You cannot call create unless the parent is saved
+      
       order_items.create(product_id: product.id, quantity: quantity, price: product.price, variation_id: variation_id)
       compute_total
     end

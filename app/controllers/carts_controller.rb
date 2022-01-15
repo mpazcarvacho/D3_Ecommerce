@@ -8,6 +8,7 @@ class CartsController < ApplicationController
     # DONE added variation_id param to current_order
 
     variation_id = params[:cart][:variation_id]
+   
     puts "#{Variation.find(variation_id).color.description}"
 
     current_order.add_product(product_id, quantity, variation_id)
