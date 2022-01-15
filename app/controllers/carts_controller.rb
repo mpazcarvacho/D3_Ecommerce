@@ -18,9 +18,41 @@ class CartsController < ApplicationController
 
   def show
     @order = current_order
-
+    @coupons = Coupon.all
     # update_stock
     
+  end
+
+  def add_coupon
+
+    current_coupons = current_user.coupons
+    if current_user.coupons.present?
+      current_coupons.each do |coupon|
+        current_order.update(
+          coupon_id: coupon.id,
+          total: coupon.fix_discount ? current_order.total - coupon.discount_value : current_order.total * 1-(coupon.discount_value),
+        )
+        coupon.update(
+          used: true,
+        )
+      
+      end
+      
+    else
+      flash[:notice]="no"
+    end
+  end
+
+  def search_coupon
+
+    # @coupon = Coupon.all.where(code: params[:q])
+   
+   
+    
+    
+    # @coupon = Coupon.all
+    
+    # redirect_to root_path
   end
 
   def pay_with_paypal
