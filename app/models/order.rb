@@ -30,7 +30,7 @@ class Order < ApplicationRecord
     product = Product.find(product_id)
     if product && product.stock > 0
       # DONE add variation_id
-      # BUG order id missing??? You cannot call create unless the parent is saved
+      # DONE order id missing??? You cannot call create unless the parent is saved. coupon set to optional
       
       order_items.create(product_id: product.id, quantity: quantity, price: product.price, variation_id: variation_id)
       compute_total
