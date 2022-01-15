@@ -3,6 +3,9 @@ class ProductsController < ApplicationController
 
   # GET /products or /products.json
   def index
+
+
+
     # TODO should I get only products with stock here?
     @products = Product.all
   end

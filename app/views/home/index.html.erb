@@ -2,7 +2,7 @@
 
 <div class="container">
 <h2 class="text-center">Productos</h2>
-<%# TODO solve n+1 queries issue %>
+
   <% @products.each_slice(3) do |products|%>
     <div class="row">
       <% products.each do |product|%>
@@ -17,6 +17,9 @@
             <div class="card-text">
               <div class='badge bg-primary'>
                 <%= product.categories.first.name %>
+              </div>
+              <div>
+                <p><%= product.stock %> units left</p>
               </div>
               <div>
                 <%= number_to_currency product.price%>
@@ -34,5 +37,5 @@
 </div>
 
 
-<%# TODO show only products with stock %>
+<%# DONE show only products with stock %>
 <%# DONE add to cart product with its variations ? %>
