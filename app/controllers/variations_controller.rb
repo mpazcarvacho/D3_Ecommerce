@@ -1,5 +1,6 @@
 class VariationsController < ApplicationController
   before_action :set_variation, only: %i[ show edit update destroy ]
+  before_action :authenticate_admin!
 
   # GET /variations or /variations.json
   def index
