@@ -1,12 +1,5 @@
 Variation.destroy_all
 
-Variation.create(
-  product_id: 1,
-  color_id: 1,
-  size_id: 1,
-  stock: 10,
-)
-
 product_id_01= Product.find_by(name: "Denim shorts").id
 product_id_02= Product.find_by(name: "Maui & Sons long sleeve Shirt").id
 product_id_03= Product.find_by(name: "Zara ripped jeans").id
@@ -66,3 +59,10 @@ Variation.create(
   size_id: size_id_l,
   stock: 0,
 )
+
+# Variation.create(
+#   product_id: 1,
+#   color_id: 1,
+#   size_id: 1,
+#   stock: 10,
+# )
