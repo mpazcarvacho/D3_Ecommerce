@@ -11,7 +11,8 @@ class Order < ApplicationRecord
   # función anónima o lambda para pasar parámetros
   before_create -> { generate_number(RANDOM_SIZE)}
 
-  validates :number, uniqueness: true
+  validates :number, presence: true, uniqueness: true, allow_blank: false, allow_nil: false
+
 
   def generate_number(size)
     self.number = loop do

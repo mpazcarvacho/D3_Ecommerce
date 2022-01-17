@@ -11,6 +11,7 @@ class Category < ApplicationRecord
   scope :all_subcategories, -> {where(category_id: !nil)}
   # scope :children, -> (cat_id){where('category_id = ?', cat_id)}
   
-  #DONE validating name of category is unique (this will ensure same name category can't be created more than once hence will only have one parent)
-  validates_uniqueness_of :name
+  #DONE validating name of category is unique (this will ensure same name category can't be created more than once hence will only have one parent).
+  # validates_uniqueness_of :name
+  validates :name, presence: true, uniqueness: true, allow_blank: false, allow_nil: false
 end

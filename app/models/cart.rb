@@ -1,6 +1,6 @@
 class Cart < ApplicationRecord
 
-  def pay_with_paypal
+  def pay_with_paypal!
     order = current_order
     # order = Order.find(params[:cart][:order_id])
 
@@ -29,7 +29,7 @@ class Cart < ApplicationRecord
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
-  def process_paypal_payment
+  def process_paypal_payment!
     details = EXPRESS_GATEWAY.details_for(params[:token])
     express_purchase_options =
     {
