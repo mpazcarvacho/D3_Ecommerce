@@ -6,7 +6,6 @@ class CartsController < ApplicationController
     quantity = params[:cart][:quantity]
     
     # DONE added variation_id param to current_order
-
     variation_id = params[:cart][:variation_id]   
 
     current_order.add_product(product_id, quantity, variation_id)
@@ -17,13 +16,14 @@ class CartsController < ApplicationController
   def show
     @order = current_order
     @coupons = Coupon.all
-    # update_stock
-    
+
   end
 
   def add_coupon
     # if there are more than one coupon, only gets first one
     current_coupons = current_user.coupons.where(used: false)
+    
+    # current_order.add_coupon!(current_coupons)
     if current_user.coupons.present?
       current_coupons.each do |coupon|
         current_order.update(
@@ -48,7 +48,7 @@ class CartsController < ApplicationController
   #  HERE there will be code to search for available coupons with code
   end
 
-  # MOVE TO CART MODEL
+  # REFACTORIZAR
   def pay_with_paypal
     order = current_order
     # order = Order.find(params[:cart][:order_id])
@@ -56,7 +56,6 @@ class CartsController < ApplicationController
     # price must be in cents
     price = order.total*100
     
-
     response = EXPRESS_GATEWAY.setup_purchase(
       price,
       ip: request.remote_ip,
@@ -78,7 +77,7 @@ class CartsController < ApplicationController
     redirect_to EXPRESS_GATEWAY.redirect_url_for(response.token)
   end
 
-  # MOVE TO CART MODEL
+  # REFACTORIZAR
   def process_paypal_payment
     details = EXPRESS_GATEWAY.details_for(params[:token])
     express_purchase_options =

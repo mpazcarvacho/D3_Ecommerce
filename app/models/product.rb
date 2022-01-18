@@ -6,4 +6,6 @@ class Product < ApplicationRecord
   has_many :colors, through: :variations
   has_many :sizes, through: :variations
 
+  validates :name, presence: true
+  validates :price, presence: true
 end

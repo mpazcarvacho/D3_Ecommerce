@@ -3,47 +3,40 @@ require 'rails_helper'
 RSpec.describe Order, type: :model do
   subject { 
     Order.create!(
-      user_id: 1,
+      user_id: User.create(
+        email: "testing123456@mail.com",
+        password: "123456",
+        password_confirmation: "123456",
+      ).id,
       number: "kjsdfkj324",
       total: 10000,
       state: "progress",
-      user_id:1,
     )
   }
   before { 
     subject.save
   }
 
-  it 'code must be present' do
+  it 'number must be present' do
 
-    subject.code = nil
+    subject.number = nil
     expect(subject).to_not be_valid
   end
 
-  it 'discount value must be present' do
+  it 'total must be present' do
 
-    subject.discount_value = nil
+    subject.total = nil
     expect(subject).to_not be_valid
   end
 
-  it 'code is unique' do
-    coupon = Coupon.create(
-      unique: true,
-      code: "code1",
-      fix_discount: true,
-      discount_value: 1000,
-      user_id:1,
+  it 'number is unique' do
+    order = Order.create(
+      user_id: 1,
+      number: "kjsdfkj324",
+      total: 10000,
+      state: "progress",
     )
-    expect(coupon).to_not be_valid
+    expect(order).to be_valid
   end
 
-  it 'user_id is optional' do
-    coupon2 = Coupon.create(
-      unique: true,
-      code: "code1",
-      fix_discount: true,
-      discount_value: 1000,
-    )
-    expect(coupon2).to_not be_valid
-  end
 end

@@ -5,8 +5,8 @@ class OrderItem < ApplicationRecord
   has_many :colors, through: :variations
   has_many :sizes, through: :variations
 
-  # TODO 
-  # def product
-  #   variation.product
-  # end
+  validates :order_id, presence: true
+  validates :product_id, presence: true
+  validates :quantity, presence: true
+  validates :variation_id, presence: true
 end

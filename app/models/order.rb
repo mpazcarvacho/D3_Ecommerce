@@ -12,8 +12,19 @@ class Order < ApplicationRecord
   before_create -> { generate_number(RANDOM_SIZE)}
 
   validates :number, presence: true, uniqueness: true, allow_blank: false, allow_nil: false
+  validates :total, presence: true
 
+  # Método de clase
+  def self.all_coupons
+    cupones = []
+    Order.all.each do |order|
+      cupones.push(order.coupons)
+    end
+    return cupones
+    # puede no ir return
+  end
 
+  # no parte con self, método de instancia
   def generate_number(size)
     self.number = loop do
       rand_str = random_candidate(size)
@@ -46,5 +57,23 @@ class Order < ApplicationRecord
     # update_attribute(name, value) public. Updates a single attribute and saves the record.
     update_attribute(:total, sum)
   end
+
+  # def add_coupon!(current_coupons)
+  #   if current_user.coupons.present?
+  #     current_coupons.each do |coupon|
+  #       current_order.update(
+  #         coupon_id: coupon.id,
+  #         total: coupon.fix_discount ? current_order.total - coupon.discount_value : current_order.total * (1-coupon.discount_value),
+  #       )
+  #       coupon.update(
+  #         used: true,
+  #       )
+      
+  #     end
+      
+  #   else
+  #     flash[:alert]="There are no available coupons!"
+  #   end
+  # end
 
 end
